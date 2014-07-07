@@ -48,10 +48,10 @@ INSTALLED_APPS = (
     'rapidsms.contrib.handlers',
     'rapidsms.contrib.messagelog',
     'rapidsms.contrib.messaging',
-    'rapidsms.contrib.default',
     'locations',
     'workers',
     'core',
+    'rapidsms.contrib.default',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -94,8 +94,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
-
-
-RAPIDSMS_HANDLERS = (
-    'core.handlers.register.RegisterHandler',
-)
