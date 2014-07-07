@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
+import dotenv
+dotenv.read_dotenv(os.path.join(BASE_DIR, '.env'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -36,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'mptt',
     'django_nose',
     'django_tables2',
     'selectable',
@@ -46,6 +49,7 @@ INSTALLED_APPS = (
     'rapidsms.contrib.messagelog',
     'rapidsms.contrib.messaging',
     'rapidsms.contrib.default',
+    'core',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -64,12 +68,10 @@ WSGI_APPLICATION = 'hfr.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
+import dj_database_url
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': dj_database_url.config(),
 }
 
 # Internationalization
