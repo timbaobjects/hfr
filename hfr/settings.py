@@ -49,6 +49,8 @@ INSTALLED_APPS = (
     'rapidsms.contrib.messagelog',
     'rapidsms.contrib.messaging',
     'rapidsms.contrib.default',
+    'locations',
+    'workers',
     'core',
 )
 
@@ -94,4 +96,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
-RAPIDSMS_HANDLERS = []
+RAPIDSMS_HANDLERS = (
+    'core.handlers.register.RegisterHandler',
+)
