@@ -8,6 +8,6 @@ class Role(models.Model):
 
 
 class Worker(models.Model):
-    role = models.ForeignKey(Role)
+    role = models.ForeignKey(Role, blank=True, null=True)
     name = models.CharField(max_length=100)
     location = models.ForeignKey(Location)
