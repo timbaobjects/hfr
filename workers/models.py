@@ -1,4 +1,5 @@
 from django.db import models
+from rapidsms.models import Contact
 from locations.models import Location
 
 
@@ -11,3 +12,5 @@ class Worker(models.Model):
     role = models.ForeignKey(Role, blank=True, null=True)
     name = models.CharField(max_length=100)
     location = models.ForeignKey(Location)
+    contact = models.OneToOneField(Contact, related_name='worker', blank=True,
+                                   null=True)
