@@ -39,27 +39,43 @@ class App(AppBase):
     def process_registration(self, msg, *tokens):
         location_code = tokens[0]
         names = tokens[1:]
+        name = ' '.join(names)
+        worker = None
         location = Location.get_by_code(location_code)
-
-        connection = msg.connections[0]
-        contact = connection.contact
-        if contact:
-            msg.respond('You are already registered!')
-            return
 
         if location is None:
             msg.respond('Invalid location code: {}. You sent: {}'.format(
                 location_code, msg.text))
             return
 
-        contact = Contact.objects.create(name=' '.join(names))
-        connection.contact = contact
-        connection.save()
+        connection = msg.connections[0]
+        contact = connection.contact
+        if contact:
+            worker = contact.worker
 
-        Worker.objects.create(name=contact.name, location=location,
-                              contact=contact)
+            if worker:
+                if worker.name == name and worker.location == location:
+                    msg.respond('You are already registered.')
+                    return
+        else:
+            contact = Contact.objects.create(name=name)
+            connection.contact = contact
+            connection.save()
 
-        response = 'Thank you {}. You are now registered in {} with the phone number {}'.format(contact.name, location.name, connection.identity)
+        if worker is None:
+            worker = Worker()
+
+        worker.name = name
+        worker.location = location
+        worker.contact = contact
+        worker.save()
+
+        response = 'Thank you {}. You are now registered at {} ' \
+            'with the phone number {}'.format(
+                name,
+                location,
+                connection.identity
+            )
         msg.respond(response)
 
     def process_report(self, msg, *tokens):
