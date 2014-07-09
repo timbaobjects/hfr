@@ -1,7 +1,11 @@
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
 from rapidsms.apps.base import AppBase
 from rapidsms.models import Contact
+from checklists.models import Form
 from locations.models import Location
 from workers.models import Worker
+from .models import Report
 from .utils import parse_text
 
 
@@ -79,5 +83,38 @@ class App(AppBase):
         msg.respond(response)
 
     def process_report(self, msg, **tokens):
-        print tokens
+        contact = msg.connections[0].contact
+        if contact is None:
+            msg.respond(
+                'You are not registered. Please register to send reports.')
+            return
+
+        worker = contact.worker
+        if worker is None:
+            msg.respond('An error occurred. Please contact your supervisor.')
+            return
+
+        form = Form.objects.first()
+        if not form:
+            raise RuntimeError('No checklists available')
+
+        current_timestamp = datetime.utcnow()
+        start = current_timestamp.replace(
+            day=1, hour=0, minute=0, second=0, microsecond=0)
+        end = start + relativedelta(months=1)
+
+        report = Report.objects.filter(
+            reporter=worker, location=worker.location, updated__gte=start,
+            updated__lt=end
+        ).first()
+        if report is None:
+            report = Report(reporter=worker, location=worker.location)
+
+        tags = form.tags
+        for key in tokens.keys():
+            if key in tags and tokens[key]:
+                report.data[key] = tokens[key]
+
+        report.save()
+
         msg.respond('Done')

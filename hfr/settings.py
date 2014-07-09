@@ -51,6 +51,7 @@ INSTALLED_APPS = (
     'rapidsms.contrib.messaging',
     'locations',
     'workers',
+    'checklists',
     'core',
     'rapidsms.contrib.default',
 )

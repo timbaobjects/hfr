@@ -1,0 +1,395 @@
+[
+{
+  "pk": 1, 
+  "model": "checklists.form", 
+  "fields": {
+    "name": "Health Facility Reporting Checklist"
+  }
+},
+{
+  "pk": 1, 
+  "model": "checklists.formgroup", 
+  "fields": {
+    "name": "Maternal Health", 
+    "form": 1
+  }
+},
+{
+  "pk": 2, 
+  "model": "checklists.formgroup", 
+  "fields": {
+    "name": "Pregnancy Outcome", 
+    "form": 1
+  }
+},
+{
+  "pk": 3, 
+  "model": "checklists.formgroup", 
+  "fields": {
+    "name": "Immunization", 
+    "form": 1
+  }
+},
+{
+  "pk": 4, 
+  "model": "checklists.formgroup", 
+  "fields": {
+    "name": "Nutrition", 
+    "form": 1
+  }
+},
+{
+  "pk": 5, 
+  "model": "checklists.formgroup", 
+  "fields": {
+    "name": "Child Health and IMCI", 
+    "form": 1
+  }
+},
+{
+  "pk": 6, 
+  "model": "checklists.formgroup", 
+  "fields": {
+    "name": "Family Planning", 
+    "form": 1
+  }
+},
+{
+  "pk": 7, 
+  "model": "checklists.formgroup", 
+  "fields": {
+    "name": "Governance", 
+    "form": 1
+  }
+},
+{
+  "pk": 8, 
+  "model": "checklists.formgroup", 
+  "fields": {
+    "name": "Monitoring and Supportive Supervision", 
+    "form": 1
+  }
+},
+{
+  "pk": 9, 
+  "model": "checklists.formgroup", 
+  "fields": {
+    "name": "Malaria", 
+    "form": 1
+  }
+},
+{
+  "pk": 10, 
+  "model": "checklists.formgroup", 
+  "fields": {
+    "name": "Mortality", 
+    "form": 1
+  }
+},
+{
+  "pk": 11, 
+  "model": "checklists.formgroup", 
+  "fields": {
+    "name": "HIV (HCT, ART, CLINICAL CARE, TB - HIV & PMTCT)", 
+    "form": 1
+  }
+},
+{
+  "pk": 1, 
+  "model": "checklists.formfield", 
+  "fields": {
+    "group": 1, 
+    "represents_boolean": false, 
+    "name": "BA", 
+    "description": "Total no. of first antenatal visits"
+  }
+},
+{
+  "pk": 2, 
+  "model": "checklists.formfield", 
+  "fields": {
+    "group": 1, 
+    "represents_boolean": false, 
+    "name": "BB", 
+    "description": "No. of women who attended antenatal clinic for four or more visits"
+  }
+},
+{
+  "pk": 3, 
+  "model": "checklists.formfield", 
+  "fields": {
+    "group": 1, 
+    "represents_boolean": false, 
+    "name": "BC", 
+    "description": "Total no. of deliveries"
+  }
+},
+{
+  "pk": 4, 
+  "model": "checklists.formfield", 
+  "fields": {
+    "group": 1, 
+    "represents_boolean": false, 
+    "name": "BD", 
+    "description": "Number of pregnant women who received malaria IPT2 this month"
+  }
+},
+{
+  "pk": 5, 
+  "model": "checklists.formfield", 
+  "fields": {
+    "group": 1, 
+    "represents_boolean": false, 
+    "name": "BE", 
+    "description": "Number of pregnant women who received at least two or more doses of tetanus toxoid"
+  }
+},
+{
+  "pk": 6, 
+  "model": "checklists.formfield", 
+  "fields": {
+    "group": 2, 
+    "represents_boolean": false, 
+    "name": "CA", 
+    "description": "Number of live births"
+  }
+},
+{
+  "pk": 7, 
+  "model": "checklists.formfield", 
+  "fields": {
+    "group": 2, 
+    "represents_boolean": false, 
+    "name": "CB", 
+    "description": "Number of live births with weight less than 2.5kg"
+  }
+},
+{
+  "pk": 8, 
+  "model": "checklists.formfield", 
+  "fields": {
+    "group": 2, 
+    "represents_boolean": false, 
+    "name": "CC", 
+    "description": "Number of still births"
+  }
+},
+{
+  "pk": 9, 
+  "model": "checklists.formfield", 
+  "fields": {
+    "group": 2, 
+    "represents_boolean": false, 
+    "name": "CD", 
+    "description": "Number of newborns with neonatal jaundice"
+  }
+},
+{
+  "pk": 10, 
+  "model": "checklists.formfield", 
+  "fields": {
+    "group": 2, 
+    "represents_boolean": false, 
+    "name": "CE", 
+    "description": "Number of newborns with neonatal sepsis"
+  }
+},
+{
+  "pk": 11, 
+  "model": "checklists.formfield", 
+  "fields": {
+    "group": 2, 
+    "represents_boolean": false, 
+    "name": "CF", 
+    "description": "Number of newborns with neonatal tetanus"
+  }
+},
+{
+  "pk": 12, 
+  "model": "checklists.formfield", 
+  "fields": {
+    "group": 3, 
+    "represents_boolean": false, 
+    "name": "DA", 
+    "description": "Number of children under 12 months old fully immunized"
+  }
+},
+{
+  "pk": 13, 
+  "model": "checklists.formfield", 
+  "fields": {
+    "group": 4, 
+    "represents_boolean": false, 
+    "name": "EA", 
+    "description": "Number of children aged 0-59 months weighing below the bottom line"
+  }
+},
+{
+  "pk": 14, 
+  "model": "checklists.formfield", 
+  "fields": {
+    "group": 4, 
+    "represents_boolean": false, 
+    "name": "EB", 
+    "description": "Number of children aged 0-59 months weighed"
+  }
+},
+{
+  "pk": 15, 
+  "model": "checklists.formfield", 
+  "fields": {
+    "group": 5, 
+    "represents_boolean": false, 
+    "name": "FA", 
+    "description": "New cases of diarrhoea under 5 years"
+  }
+},
+{
+  "pk": 16, 
+  "model": "checklists.formfield", 
+  "fields": {
+    "group": 5, 
+    "represents_boolean": false, 
+    "name": "FB", 
+    "description": "New cases of pneumonia under 5 years"
+  }
+},
+{
+  "pk": 17, 
+  "model": "checklists.formfield", 
+  "fields": {
+    "group": 6, 
+    "represents_boolean": false, 
+    "name": "GA", 
+    "description": "Number of individuals aged 15-49 years using modern contraceptives"
+  }
+},
+{
+  "pk": 18, 
+  "model": "checklists.formfield", 
+  "fields": {
+    "group": 7, 
+    "represents_boolean": false, 
+    "name": "HA", 
+    "description": "Did your WDC mobilise for community participation in health this month with meeting minutes?"
+  }
+},
+{
+  "pk": 19, 
+  "model": "checklists.formfield", 
+  "fields": {
+    "group": 8, 
+    "represents_boolean": false, 
+    "name": "JA", 
+    "description": "Number of Integrated Supportive Supervision visits conducted by government officials in-charge during reporting period using standard checklist"
+  }
+},
+{
+  "pk": 20, 
+  "model": "checklists.formfield", 
+  "fields": {
+    "group": 8, 
+    "represents_boolean": false, 
+    "name": "JB", 
+    "description": "Number of external on-site monitoring visits conducted by government officials in-charge during reporting period using standard checklist"
+  }
+},
+{
+  "pk": 21, 
+  "model": "checklists.formfield", 
+  "fields": {
+    "group": 9, 
+    "represents_boolean": false, 
+    "name": "KA", 
+    "description": "Number of children under 5 years with uncomplicated malaria receiving ACT"
+  }
+},
+{
+  "pk": 22, 
+  "model": "checklists.formfield", 
+  "fields": {
+    "group": 10, 
+    "represents_boolean": false, 
+    "name": "MA", 
+    "description": "Number of deaths of babies aged 0-28 days"
+  }
+},
+{
+  "pk": 23, 
+  "model": "checklists.formfield", 
+  "fields": {
+    "group": 10, 
+    "represents_boolean": false, 
+    "name": "MB", 
+    "description": "Number of deaths of babies aged 28 days-11 months"
+  }
+},
+{
+  "pk": 24, 
+  "model": "checklists.formfield", 
+  "fields": {
+    "group": 10, 
+    "represents_boolean": false, 
+    "name": "MC", 
+    "description": "Number of deaths of children 12-59 months"
+  }
+},
+{
+  "pk": 25, 
+  "model": "checklists.formfield", 
+  "fields": {
+    "group": 10, 
+    "represents_boolean": false, 
+    "name": "MD", 
+    "description": "Number of deaths of women relating to pregnancy"
+  }
+},
+{
+  "pk": 26, 
+  "model": "checklists.formfield", 
+  "fields": {
+    "group": 11, 
+    "represents_boolean": false, 
+    "name": "NA", 
+    "description": "Number of pregnant women who received HIV counseling, testing and received results"
+  }
+},
+{
+  "pk": 27, 
+  "model": "checklists.formfield", 
+  "fields": {
+    "group": 11, 
+    "represents_boolean": false, 
+    "name": "NB", 
+    "description": "Number of women who tested HIV positive"
+  }
+},
+{
+  "pk": 28, 
+  "model": "checklists.formfield", 
+  "fields": {
+    "group": 11, 
+    "represents_boolean": false, 
+    "name": "NC", 
+    "description": "Number of HIV positive pregnant women who received ARV prophylaxis for PMTCT"
+  }
+},
+{
+  "pk": 2, 
+  "model": "checklists.fieldoption", 
+  "fields": {
+    "field": 18, 
+    "value": 1, 
+    "label": "Yes"
+  }
+},
+{
+  "pk": 3, 
+  "model": "checklists.fieldoption", 
+  "fields": {
+    "field": 18, 
+    "value": 2, 
+    "label": "No"
+  }
+}
+]
