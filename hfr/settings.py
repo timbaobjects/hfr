@@ -97,3 +97,14 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 RAPIDSMS_HANDLERS = ()
+CHARACTER_TRANSLATIONS = (
+    ('i', '1'),
+    ('I', '1'),
+    ('o', '0'),
+    ('O', '0'),
+    ('l', '1'),
+    ('L', '1'),
+)
+TRANSLATION_TABLE = dict((ord(char_from), ord(char_to))
+                         for char_from, char_to in
+                         CHARACTER_TRANSLATIONS)

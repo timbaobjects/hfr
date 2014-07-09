@@ -26,7 +26,7 @@ class App(AppBase):
         if is_reg:
             self.process_registration(msg, *tokens)
         else:
-            self.process_report(msg, *tokens)
+            self.process_report(msg, **tokens)
 
         return True
 
@@ -78,5 +78,6 @@ class App(AppBase):
             )
         msg.respond(response)
 
-    def process_report(self, msg, *tokens):
-        pass
+    def process_report(self, msg, **tokens):
+        print tokens
+        msg.respond('Done')
