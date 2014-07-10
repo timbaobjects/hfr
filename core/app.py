@@ -117,4 +117,8 @@ class App(AppBase):
 
         report.save()
 
-        msg.respond('Done')
+        cojoined = ''.join(
+            ('{}{}'.format(k, v) for k, v in tokens.iteritems()))
+
+        msg.respond('Thank you. You sent: {} {}'.format(
+            self.keyword, cojoined))

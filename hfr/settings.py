@@ -109,3 +109,5 @@ CHARACTER_TRANSLATIONS = (
 TRANSLATION_TABLE = dict((ord(char_from), ord(char_to))
                          for char_from, char_to in
                          CHARACTER_TRANSLATIONS)
+
+LOCATION_GRAPH_CACHE_LIFETIME = 60000
