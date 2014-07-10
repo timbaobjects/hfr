@@ -46,6 +46,6 @@ def parse_text(prefix, text):
 
 
 def parse_report_input(value):
-    pattern = re.compile(r'(?P<tag>[A-Z]+)(?P<answer>\d*)', re.IGNORECASE)
+    pattern = re.compile(r'(?P<tag>[A-Z]+)\s*(?P<answer>\d+)', re.IGNORECASE)
     report_data = dict([(r.group('tag').upper(), r.group('answer')) for r in pattern.finditer(value)])
     return report_data
