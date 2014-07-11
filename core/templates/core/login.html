@@ -1,0 +1,14 @@
+{% extends 'core/layout.html' %}
+{% block content %}
+<div>
+	<form action="" class="pure-form-stacked" method="POST">
+		<fieldset>
+			<legend>{{ page_title }}</legend>
+			{% csrf_token %}
+			{{ form.username }}
+			{{ form.password }}
+			<button class="pure-button pure-button-primary" type="submit">Login</button>
+		</fieldset>
+	</form>
+</div>
+{% endblock %}

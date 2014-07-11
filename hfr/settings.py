@@ -19,7 +19,7 @@ dotenv.read_dotenv(os.path.join(BASE_DIR, '.env'))
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'vvn5)6t$9_2)+v2_do6_(5vw&%de5vz+7k$qw(&j8!%z8*(2@9'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'nobody would ever guess')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -117,6 +117,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
+)
+
 RAPIDSMS_HANDLERS = ()
 CHARACTER_TRANSLATIONS = (
     ('i', '1'),
@@ -133,3 +139,5 @@ TRANSLATION_TABLE = dict((ord(char_from), ord(char_to))
 LOCATION_GRAPH_CACHE_LIFETIME = 60000
 
 PAGE_SIZE = 25
+LOGIN_REDIRECT_URL = '/'
+
