@@ -131,3 +131,5 @@ TRANSLATION_TABLE = dict((ord(char_from), ord(char_to))
                          CHARACTER_TRANSLATIONS)
 
 LOCATION_GRAPH_CACHE_LIFETIME = 60000
+
+PAGE_SIZE = 25
