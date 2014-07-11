@@ -1,5 +1,5 @@
-from datetime import datetime
 from dateutil.relativedelta import relativedelta
+from django.utils.timezone import now
 from rapidsms.apps.base import AppBase
 from rapidsms.models import Contact
 from checklists.models import Form
@@ -35,10 +35,12 @@ class App(AppBase):
         return True
 
     def help_registration(self, msg):
-        pass
+        reg_help_msg = 'Send {} REG LOCATION-CODE NAME to register'.format(
+            self.keyword.upper())
+        msg.respond(reg_help_msg)
 
     def help_report(self, msg):
-        pass
+        msg.respond('Please consult your form for the correct format')
 
     def process_registration(self, msg, *tokens):
         location_code = tokens[0]
@@ -98,7 +100,7 @@ class App(AppBase):
         if not form:
             raise RuntimeError('No checklists available')
 
-        current_timestamp = datetime.utcnow()
+        current_timestamp = now()
         start = current_timestamp.replace(
             day=1, hour=0, minute=0, second=0, microsecond=0)
         end = start + relativedelta(months=1)
@@ -114,6 +116,9 @@ class App(AppBase):
         for key in tokens.keys():
             if key in tags and tokens[key]:
                 report.data[key] = tokens[key]
+            else:
+                # remove any blank/unused stuff
+                tokens.pop(key)
 
         report.save()
 
@@ -121,4 +126,4 @@ class App(AppBase):
             ('{}{}'.format(k, v) for k, v in tokens.iteritems()))
 
         msg.respond('Thank you. You sent: {} {}'.format(
-            self.keyword, cojoined))
+            self.keyword.upper(), cojoined))
