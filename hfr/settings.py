@@ -28,6 +28,9 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'public', 'media')
+MEDIA_URL = '/media/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'public', 'static')
 
 # Application definition
 
@@ -47,6 +50,7 @@ INSTALLED_APPS = (
     'rapidsms',
     'rapidsms.backends.database',
     'rapidsms.contrib.handlers',
+    'rapidsms.contrib.httptester',
     'rapidsms.contrib.messagelog',
     'rapidsms.contrib.messaging',
     'locations',
@@ -56,6 +60,12 @@ INSTALLED_APPS = (
     'rapidsms.contrib.default',
 )
 
+INSTALLED_BACKENDS = {
+    'message_tester': {
+        'ENGINE': 'rapidsms.backends.database.DatabaseBackend',
+    },
+}
+
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -63,6 +73,16 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.contrib.messages.context_processors.messages',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.media',
+    'django.core.context_processors.request',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.static',
 )
 
 ROOT_URLCONF = 'hfr.urls'
