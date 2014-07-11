@@ -2,6 +2,7 @@ from django.core.cache import cache, get_cache, InvalidCacheBackendError
 from django.db import models
 from mptt.models import MPTTModel, TreeForeignKey
 import networkx as nx
+import pandas as pd
 from django.conf import settings
 
 CACHE_KEY = 'locations_graph'
@@ -79,6 +80,29 @@ class Location(MPTTModel):
         children_ids = reversed_graph.successors(self.id)
         return [reversed_graph.node[id] for id in children_ids]
 
+    def _get_annual_population_estimate(self, year):
+        result = None
+
+        if self.type.name not in ('Country', 'State', 'LGA'):
+            return result
+
+        try:
+            result = self.census_results.filter(
+                location=self, year__lte=year).latest('year')
+        except Exception:
+            return result
+        diff = year - result.year
+        projection = result.population * ((1 + (result.growth_rate
+                                                / 100.0)) ** diff)
+
+        return int(round(projection))
+
+    def get_annual_population_growth_estimate(self, year):
+        return self._get_annual_population_estimate(year)
+
+    def get_monthly_population_growth_estimate(self, year):
+        return int(round(self._get_annual_population_estimate(year) / 12.0))
+
 
 def get_locations_graph(reverse=False):
     try:
@@ -114,3 +138,37 @@ def generate_locations_graph():
         graph.add_edge(loc_info['parent__pk'], loc_info['pk'])
 
     return graph
+
+
+class CensusResult(models.Model):
+    '''Stores population count'''
+    location = models.ForeignKey(Location, related_name='census_results')
+    year = models.IntegerField()
+    population = models.IntegerField()
+    growth_rate = models.FloatField()
+
+    @staticmethod
+    def get_dataframe():
+        try:
+            app_cache = get_cache('census_data')
+        except InvalidCacheBackendError:
+            app_cache = cache
+
+        dataframe = app_cache.get('population_estimates')
+        if not dataframe:
+            dataframe = generate_population_dataframe()
+            app_cache.set('population_estimates', dataframe)
+
+        return dataframe
+
+
+def generate_population_dataframe():
+    qs = CensusResult.objects.values(
+        'location__pk', 'year', 'population',
+        'growth_rate'
+    )
+    dataframe = pd.DataFrame(list(qs))
+
+    return dataframe.rename(columns={
+        'location__pk': 'loc_id',
+    })
