@@ -11,7 +11,7 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-    # (r'^accounts/', include('rapidsms.urls.login_logout')),
+    (r'^accounts/', include('rapidsms.urls.login_logout')),
     # url(r'^$', 'rapidsms.views.dashboard', name='rapidsms-dashboard'),
     url(r'', include('core.urls')),
     (r'^httptester/', include('rapidsms.contrib.httptester.urls')),
