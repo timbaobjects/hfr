@@ -1,0 +1,39 @@
+{% extends 'core/base.html' %}
+{% block main %}
+<h3>{{ page_title }}</h3>
+<div>
+{% if workers %}
+<table class="pure-table">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Location</th>
+			<th>Phone</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for worker in workers %}
+		<tr>
+			<td>{{ worker.name }}</td>
+			<td>{{ worker.location }}</td>
+			<td>{{ worker.contact.connection_set.first.identity }}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+<div>
+<ul class="pure-paginator">
+{% if page_obj.has_previous %}
+<li><a href="?page={{ page_obj.previous_page_number }}"></a></li>
+{% endif %}
+<li><a href="#">Page {{ page_obj.number }} of {{ paginator.num_pages }}</a></li>
+{% if page_obj.has_has_next %}
+<li><a href="?page={{ page_obj.next_page_number }}"></a></li>
+{% endif %}
+</ul>
+</div>
+{% else %}
+<p>No registered personnel</p>
+{% endif %}
+</div>
+{% endblock %}

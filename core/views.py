@@ -94,7 +94,6 @@ class MessageListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(MessageListView, self).get_context_data(**kwargs)
-        context['user'] = self.user
         context['page_title'] = self.page_title
         return context
 
@@ -110,6 +109,11 @@ class ReportListView(ListView):
     def dispatch(self, request, *args, **kwargs):
         return super(ReportListView, self).dispatch(request, *args, **kwargs)
 
+    def get_context_data(self, **kwargs):
+        context = super(ReportListView, self).get_context_data(**kwargs)
+        context['page_title'] = self.page_title
+        return context
+
 
 class WorkerListView(ListView):
     context_object_name = 'workers'
@@ -121,3 +125,8 @@ class WorkerListView(ListView):
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super(WorkerListView, self).dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(WorkerListView, self).get_context_data(**kwargs)
+        context['page_title'] = self.page_title
+        return context

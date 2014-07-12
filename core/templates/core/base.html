@@ -1,0 +1,22 @@
+{% extends 'core/layout.html' %}
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/menu.css">
+{% endblock %}
+{% block content %}
+<div class="header">
+	<div class="main-menu pure-menu pure-menu-open pure-menu-horizontal">
+		<a class="pure-menu-heading" href="">Health Facility Reporting</a>
+		<ul>
+			<li><a href="{% url 'personnel' %}">Personnel</a></li>
+			<li><a href="{% url 'messages' %}">Messages</a></li>
+			<li><a href="{% url 'signout' %}">Logout</a></li>
+		</ul>
+	</div>
+</div>
+<div class="pure-g">
+	<div class="pure-u-3-24"></div>
+	<div class="pure-u-3-4">
+	{% block main %}{% endblock %}
+	</div>
+</div>
+{% endblock %}

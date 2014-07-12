@@ -1,0 +1,7 @@
+.main-menu {
+	padding: 0.5em;
+}
+
+.main-menu.pure-menu-open {
+	background: #000;
+}

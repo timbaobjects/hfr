@@ -1,0 +1,43 @@
+{% extends 'core/base.html' %}
+{% block main %}
+<h3>{{ page_title }}</h3>
+<div>
+{% if object_list %}
+<table class="pure-table">
+	<thead>
+		<tr>
+			<th>Phone</th>
+			<th>Text</th>
+			<th>Direction</th>
+			<th>Time</th>
+			<th>Date</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for message in object_list %}
+		<tr>
+			<td>{{ message.connection.identity }}</td>
+			<td>{{ message.text }}</td>
+			<td>{{ message.get_direction_display }}</td>
+			<td>{{ message.date|date:'h:i:s A' }}</td>
+			<td>{{ message.date|date:'D d/M/Y' }}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+<div>
+<ul class="pure-paginator">
+{% if page_obj.has_previous %}
+<li><a href="?page={{ page_obj.previous_page_number }}"></a></li>
+{% endif %}
+<li><a href="#">Page {{ page_obj.number }} of {{ paginator.num_pages }}</a></li>
+{% if page_obj.has_has_next %}
+<li><a href="?page={{ page_obj.next_page_number }}"></a></li>
+{% endif %}
+</ul>
+</div>
+{% else %}
+<p>No messages</p>
+{% endif %}
+</div>
+{% endblock %}

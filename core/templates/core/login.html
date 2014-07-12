@@ -5,8 +5,7 @@
 		<fieldset>
 			<legend>{{ page_title }}</legend>
 			{% csrf_token %}
-			{{ form.username }}
-			{{ form.password }}
+			{{ form.as_p }}
 			<button class="pure-button pure-button-primary" type="submit">Login</button>
 		</fieldset>
 	</form>
