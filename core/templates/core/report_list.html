@@ -1,26 +1,40 @@
 {% extends 'core/base.html' %}
+{% load common %}
 {% block main %}
 <h3>{{ page_title }}</h3>
 <div>
-{% if object_list %}
+{% if reports %}
 <table class="pure-table">
 	<thead>
 		<tr>
-			<th>Phone</th>
-			<th>Text</th>
-			<th>Direction</th>
-			<th>Time</th>
-			<th>Date</th>
+			<th rowspan="2">Reporter</th>
+			<th rowspan="2">Phone</th>
+			<th rowspan="2">Time</th>
+			<th rowspan="2">Date</th>
+			{% for group in checklist.groups.all %}
+			<th colspan="{{ group.fields.count }}">{{ group.name }}</th>
+			{% endfor %}
+		</tr>
+		<tr>
+			{% for group in checklist.groups.all %}
+			{% for field in group.fields.all %}
+			<th><abbr title="{{ field.description }}">{{ field.name }}</abbr></th>
+			{% endfor %}
+			{% endfor %}
 		</tr>
 	</thead>
 	<tbody>
-		{% for message in object_list %}
+		{% for report in reports %}
 		<tr>
-			<td>{{ message.connection.identity }}</td>
-			<td>{{ message.text }}</td>
-			<td>{{ message.get_direction_display }}</td>
-			<td>{{ message.date|date:'h:i:s A' }}</td>
-			<td>{{ message.date|date:'D d/M/Y' }}</td>
+			<td>{{ report.reporter.name }}</td>
+			<td>{{ report.reporter.contact.connection_set.all.0.identity }}</td>
+			<td>{{ report.updated|date:'h:i:s A' }}</td>
+			<td>{{ report.updated|date:'D d/M/Y' }}</td>
+			{% for group in checklist.groups.all %}
+			{% for field in group.fields.all %}
+			<td>{{ report.data|hash:field.name }}</td>
+			{% endfor %}
+			{% endfor %}
 		</tr>
 		{% endfor %}
 	</tbody>

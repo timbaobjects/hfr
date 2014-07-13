@@ -10,6 +10,7 @@ from django.utils.http import is_safe_url
 from django.views.generic import ListView, View
 from django.views.generic.base import TemplateResponseMixin
 from rapidsms.contrib.messagelog.models import Message
+from checklists.models import Form
 from core.models import Report
 from workers.models import Worker
 
@@ -81,7 +82,7 @@ class FilteredListView(ListView):
 
 
 class MessageListView(ListView):
-    context_object_name = 'messages'
+    context_object_name = 'msgs'
     page_title = 'Messages'
     paginate_by = settings.PAGE_SIZE
     queryset = Message.objects.order_by('-pk')
@@ -111,6 +112,7 @@ class ReportListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(ReportListView, self).get_context_data(**kwargs)
+        context['checklist'] = Form.objects.first()
         context['page_title'] = self.page_title
         return context
 

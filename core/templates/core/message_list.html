@@ -2,7 +2,7 @@
 {% block main %}
 <h3>{{ page_title }}</h3>
 <div>
-{% if object_list %}
+{% if msgs %}
 <table class="pure-table">
 	<thead>
 		<tr>
@@ -14,7 +14,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		{% for message in object_list %}
+		{% for message in msgs %}
 		<tr>
 			<td>{{ message.connection.identity }}</td>
 			<td>{{ message.text }}</td>
