@@ -1,56 +1,60 @@
 {% extends 'core/base.html' %}
 {% load common %}
 {% block main %}
-<div>
-{% if reports %}
-<table class="pure-table">
-	<thead>
-		<tr>
-			<th rowspan="2">Reporter</th>
-			<th rowspan="2">Phone</th>
-			<th rowspan="2">Time</th>
-			<th rowspan="2">Date</th>
-			{% for group in checklist.groups.all %}
-			<th colspan="{{ group.fields.count }}">{{ group.name }}</th>
-			{% endfor %}
-		</tr>
-		<tr>
-			{% for group in checklist.groups.all %}
-			{% for field in group.fields.all %}
-			<th><abbr title="{{ field.description }}">{{ field.name }}</abbr></th>
-			{% endfor %}
-			{% endfor %}
-		</tr>
-	</thead>
-	<tbody>
-		{% for report in reports %}
-		<tr>
-			<td>{{ report.reporter.name }}</td>
-			<td>{{ report.reporter.contact.connection_set.all.0.identity }}</td>
-			<td>{{ report.updated|date:'h:i:s A' }}</td>
-			<td>{{ report.updated|date:'D d/M/Y' }}</td>
-			{% for group in checklist.groups.all %}
-			{% for field in group.fields.all %}
-			<td>{{ report.data|hash:field.name }}</td>
-			{% endfor %}
-			{% endfor %}
-		</tr>
-		{% endfor %}
-	</tbody>
-</table>
-<div>
-<ul class="pure-paginator">
-{% if page_obj.has_previous %}
-<li><a href="?page={{ page_obj.previous_page_number }}"></a></li>
-{% endif %}
-<li><a href="#">Page {{ page_obj.number }} of {{ paginator.num_pages }}</a></li>
-{% if page_obj.has_has_next %}
-<li><a href="?page={{ page_obj.next_page_number }}"></a></li>
-{% endif %}
-</ul>
-</div>
-{% else %}
-<p>No messages</p>
-{% endif %}
+<div class="row">
+	<div class="col-md-12">
+		{% if reports %}
+		<div class="table-responsive">
+			<table class="table table-bordered table-condensed table-striped">
+				<thead>
+					<tr>
+						<th>Date</th>
+						<th>Time</th>
+						<th>Phone</th>
+						<th width="80">Reporter</th>
+						<th width="80">Facility</th>
+						{% for group in checklist.groups.all %}
+						{% for field in group.fields.all %}
+						<th><abbr title="{{ group.name }} : {{ field.description }}">{{ field.name }}</abbr></th>
+						{% endfor %}
+						{% endfor %}
+						<th>Edit</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for report in reports %}
+					<tr>
+						<td>{{ report.updated|date:'d/M/Y' }}</td>
+						<td>{{ report.updated|date:'h:i A' }}</td>
+						<td>{{ report.reporter.contact.connection_set.all.0.identity }}</td>
+						<td width="80">{{ report.reporter.name }}</td>
+						<td width="80">LGA OFFICE AYAMELUM</td>
+						{% for group in checklist.groups.all %}
+						{% for field in group.fields.all %}
+						<td>{{ report.data|hash:field.name }}</td>
+						{% endfor %}
+						{% endfor %}
+						<td><a href="#">Edit</a></td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</table>
+		</div>
+		<div>
+			<ul class="pagination pagination-sm">
+				{% if page_obj.has_previous %}
+				<li><a href="?page={{ page_obj.previous_page_number }}"></a></li>
+				{% endif %}
+				<li><a href="#">Page {{ page_obj.number }} of {{ paginator.num_pages }}</a></li>
+				{% if page_obj.has_has_next %}
+				<li><a href="?page={{ page_obj.next_page_number }}"></a></li>
+				{% endif %}
+			</ul>
+		</div>
+		{% else %}
+		<p>No messages</p>
+		{% endif %}
+	</div>
 </div>
 {% endblock %}
