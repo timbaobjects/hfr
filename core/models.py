@@ -2,6 +2,7 @@ from django.db import models
 from django_hstore import hstore
 from locations.models import Location
 from workers.models import Worker
+from .managers import ReportManager
 
 
 class Report(models.Model):
@@ -11,4 +12,4 @@ class Report(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
-    objects = hstore.HStoreManager()
+    objects = ReportManager()
