@@ -6,21 +6,21 @@
 		<table class="table table-condensed table-bordered table-striped table-hover">
 			<thead>
 				<tr>
-					<th>Phone</th>
-					<th>Text</th>
-					<th>Direction</th>
-					<th>Time</th>
 					<th>Date</th>
+					<th>Time</th>
+					<th>Phone</th>
+					<th>Direction</th>
+					<th>Text</th>
 				</tr>
 			</thead>
 			<tbody>
 				{% for message in msgs %}
 				<tr>
-					<td>{{ message.connection.identity }}</td>
-					<td>{{ message.text }}</td>
-					<td>{{ message.get_direction_display }}</td>
-					<td>{{ message.date|date:'h:i:s A' }}</td>
 					<td>{{ message.date|date:'D d/M/Y' }}</td>
+					<td>{{ message.date|date:'h:i:s A' }}</td>
+					<td>{{ message.connection.identity }}</td>
+					<td>{{ message.get_direction_display }}</td>
+					<td>{{ message.text }}</td>
 				</tr>
 				{% endfor %}
 			</tbody>
