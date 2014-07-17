@@ -17,6 +17,7 @@
         <link rel="stylesheet" href="{{ STATIC_URL }}css/pure-min.css">
         <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.css">
         <link rel="stylesheet" href="{{ STATIC_URL }}css/custom.css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/daterangepicker-bs3.css">
         {% block styles %}{% endblock %}
         <script src="{{ STATIC_URL }}js/vendor/modernizr-2.6.2.min.js"></script>
         {% block head_scripts %}{% endblock %}
@@ -31,6 +32,8 @@
         <script>window.jQuery || document.write('<script src="{{ STATIC_URL }}js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
         {% block tail_scripts %}{% endblock %}
         <script src="{{ STATIC_URL }}js/plugins.js"></script>
-        <script src="{{ STATIC_URL }}js/main.js"></script>
+        <script src="{{ STATIC_URL }}js/custom.js"></script>
+        <script src="{{ STATIC_URL }}js/moment.js"></script>
+        <script src="{{ STATIC_URL }}js/daterangepicker.js"></script>
     </body>
 </html>
