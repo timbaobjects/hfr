@@ -26,14 +26,14 @@
 			</tbody>
 		</table>
 		<div>
-			<ul class="pure-paginator">
-			{% if page_obj.has_previous %}
-			<li><a href="?page={{ page_obj.previous_page_number }}"></a></li>
-			{% endif %}
-			<li><a href="#">Page {{ page_obj.number }} of {{ paginator.num_pages }}</a></li>
-			{% if page_obj.has_has_next %}
-			<li><a href="?page={{ page_obj.next_page_number }}"></a></li>
-			{% endif %}
+			<ul class="pagination pagination-sm">
+				{% if page_obj.has_previous %}
+				<li><a href="?page={{ page_obj.previous_page_number }}"></a></li>
+				{% endif %}
+				<li><a href="#">Page {{ page_obj.number }} of {{ paginator.num_pages }}</a></li>
+				{% if page_obj.has_has_next %}
+				<li><a href="?page={{ page_obj.next_page_number }}"></a></li>
+				{% endif %}
 			</ul>
 		</div>
 		{% else %}
