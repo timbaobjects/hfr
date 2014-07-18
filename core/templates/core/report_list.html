@@ -34,7 +34,7 @@
 						<td>{{ report.data|hash:field.name }}</td>
 						{% endfor %}
 						{% endfor %}
-						<td><a href="#">Edit</a></td>
+						<td><a href="{% url 'report_edit' pk=report.pk %}">Edit</a></td>
 					</tr>
 					{% endfor %}
 				</tbody>

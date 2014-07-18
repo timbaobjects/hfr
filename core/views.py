@@ -2,15 +2,17 @@ from django.contrib.auth import REDIRECT_FIELD_NAME, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.conf import settings
+from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 from django.utils.decorators import method_decorator
 from django.utils.http import is_safe_url
-from django.views.generic import ListView, View
+from django.views.generic import ListView, UpdateView, View
 from django.views.generic.base import TemplateResponseMixin
 from rapidsms.contrib.messagelog.models import Message
 from checklists.models import Form
+from core.forms import generate_report_edit_form
 from core.models import Report
 from workers.models import Worker
 
@@ -132,3 +134,25 @@ class WorkerListView(ListView):
         context = super(WorkerListView, self).get_context_data(**kwargs)
         context['page_title'] = self.page_title
         return context
+
+
+class ReportEditView(UpdateView):
+    page_title = 'Edit report'
+    template_name = 'core/report_edit.html'
+
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        self.report = get_object_or_404(Report, pk=kwargs['pk'])
+        self.form_class = generate_report_edit_form(self.report.form)
+        return super(ReportEditView, self).dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(ReportEditView, self).get_context_data(**kwargs)
+
+        return context
+
+    def get_object(self):
+        return self.report
+
+    def get_success_url(self):
+        return reverse('reports')

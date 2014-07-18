@@ -107,10 +107,11 @@ class App(AppBase):
 
         report = Report.objects.filter(
             reporter=worker, location=worker.location, updated__gte=start,
-            updated__lt=end
+            updated__lt=end, form=form
         ).first()
         if report is None:
-            report = Report(reporter=worker, location=worker.location)
+            report = Report(reporter=worker, location=worker.location,
+                            form=form)
 
         tags = form.tags
         for key in tokens.keys():
