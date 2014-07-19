@@ -1,4 +1,5 @@
 {% extends 'core/base.html' %}
+{% load bootstrap_pagination %}
 {% load common %}
 {% block main %}
 <div class="row">
@@ -41,7 +42,9 @@
 			</table>
 		</table>
 		</div>
-		<div>
+		<div class="text-center">
+			{% bootstrap_paginate page_obj range=10 %}
+			<br>
 			<ul class="pagination pagination-sm">
 				{% if page_obj.has_previous %}
 				<li><a href="?page={{ page_obj.previous_page_number }}"></a></li>
