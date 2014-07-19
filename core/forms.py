@@ -21,7 +21,8 @@ class ReportEditFormBase(better_forms.BetterForm):
                 }
 
         # weed out unused keys
-        for key in data:
+        keys = data.keys()
+        for key in keys:
             if data[key] in ('', False, None):
                 data.pop(key)
 
@@ -41,7 +42,8 @@ def generate_report_edit_form(form):
 
             options = list(field.options.all())
             if options:
-                choices = [(option.value, option.label) for option in options]
+                choices = [('', 'None')] + \
+                    [(option.value, option.label) for option in options]
 
                 fields[field_name] = forms.ChoiceField(
                     choices=choices,
