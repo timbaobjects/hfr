@@ -49,12 +49,12 @@ def generate_report_edit_form(form):
                     choices=choices,
                     help_text=field.description,
                     label=field.name,
-                    required=False)
+                    required=False, widget=forms.TextInput(attrs={'class': 'form-control col-md-1'}))
             else:
                 fields[field_name] = forms.IntegerField(
                     help_text=field.description,
                     label=field.name,
-                    required=False)
+                    required=False, widget=forms.TextInput(attrs={'class': 'form-control col-md-1'}))
 
         groups.append(groupspec)
 

@@ -3,3 +3,6 @@ body{padding: 35px; background-color: ;}
 .navbar-nav>li>a {text-shadow: 1px 1px 2px rgba(0,0,0,0.25);}
 .divider-vertical {border-left: 1px solid #65D5E4;}
 .table{font-size: 12px;}
+.form-inline .form-group select.col-md-1, .form-inline .form-group input.col-md-1, .col-md-1{width: 81px;}
+.form-inline .form-group select.col-md-2, .form-inline .form-group input.col-md-2, .col-md-2{width: 170px;}
+.form-inline .form-group select.col-md-3, .form-inline .form-group input.col-md-3, .col-md-3{width: 255px;}
