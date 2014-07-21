@@ -27,7 +27,7 @@ class MessageDateTimeRangeFilter(django_filters.CharFilter):
 
 class MessageDirectionFilter(django_filters.ChoiceFilter):
     def __init__(self, *args, **kwargs):
-        kwargs['choices'] = [(None, '')] + list(Message.DIRECTION_CHOICES)
+        kwargs['choices'] = [('', '')] + list(Message.DIRECTION_CHOICES)
         return super(MessageDirectionFilter, self).__init__(*args, **kwargs)
 
     def filter(self, qs, value):
@@ -49,7 +49,7 @@ class MessageFilterSet(django_filters.FilterSet):
     direction = MessageDirectionFilter()
     phone = MessageConnectionFilter()
     date_range = MessageDateTimeRangeFilter(widget=forms.TextInput({
-        'class': 'datetimepicker'}))
+        'class': 'time-range'}))
 
     class Meta:
         model = Message
