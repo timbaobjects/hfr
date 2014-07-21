@@ -12,6 +12,7 @@ from django.views.generic import ListView, UpdateView, View
 from django.views.generic.base import TemplateResponseMixin
 from rapidsms.contrib.messagelog.models import Message
 from checklists.models import Form
+from core.filters import MessageFilterSet
 from core.forms import generate_report_edit_form
 from core.models import Report
 from workers.models import Worker
@@ -73,9 +74,13 @@ class FilteredListView(ListView):
         return self.filter_set.qs
 
     def get(self, request, *args, **kwargs):
+        if self.model:
+            qs = self.model._default_manager.all()
+        else:
+            qs = self.queryset
         self.filter_set = self.filter_class(
             request.GET,
-            queryset=self.model._default_manager.all())
+            queryset=qs)
 
         self.object_list = self.get_queryset()
         context = self.get_context_data(object_list=self.object_list)
@@ -83,8 +88,9 @@ class FilteredListView(ListView):
         return self.render_to_response(context)
 
 
-class MessageListView(ListView):
+class MessageListView(FilteredListView):
     context_object_name = 'msgs'
+    filter_class = MessageFilterSet
     page_title = 'Messages'
     paginate_by = settings.PAGE_SIZE
     queryset = Message.objects.order_by('-pk')

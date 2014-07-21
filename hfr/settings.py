@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'bootstrap_pagination',
     'mptt',
     'django_hstore',
+    'django_filters',
     'django_nose',
     'django_tables2',
     'selectable',
