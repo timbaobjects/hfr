@@ -16,4 +16,4 @@ class LocationQuerySet(HStoreQuerySet):
         data_series = df.pop('data').tolist()
         temp = [row if not isnull(row) else row for row in data_series]
 
-        return df.join(DataFrame(temp))
+        return df.join(DataFrame(temp)).convert_objects(convert_numeric=True)
