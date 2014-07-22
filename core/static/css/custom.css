@@ -5,6 +5,9 @@ body{padding: 35px; background-color: ;}
 .table{font-size: 12px;}
 .center-style{margin-top: 3em;}
 .pagination{margin-top:2px;}
+.form-inline > * {padding-top:5.3px;}
+.form-inline .form-group p{display: inline-block; margin-bottom: 0px;}
+.form-inline .form-group .btn-custom{margin-top:-24px; margin-bottom: 0px;}
 .form-inline .form-group select.col-md-1, .form-inline .form-group input.col-md-1, .col-md-1{width: 81px;}
 .form-inline .form-group select.col-md-2, .form-inline .form-group input.col-md-2, .col-md-2{width: 170px;}
 .form-inline .form-group select.col-md-3, .form-inline .form-group input.col-md-3, .col-md-3{width: 255px;}

@@ -3,11 +3,12 @@
 {% block main %}
 <div class="row">
 	<div class="col-md-12">
-		<div class="well">
-		<form>
-		{{ filter_form.as_p }}
-		<button class="btn btn-warning" type="submit">Filter</button>
-		
+		<div class="well well-sm">
+		<form class="form-inline">
+			<div class="form-group">
+				{{ filter_form.as_p }}
+				<button class="btn btn-custom btn-sm btn-warning" type="submit"><span class="glyphicon glyphicon-search"> Filter</span></button>
+			</div>
 		</form>
 		</div>
 		{% if msgs %}
