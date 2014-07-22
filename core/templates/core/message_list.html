@@ -3,7 +3,13 @@
 {% block main %}
 <div class="row">
 	<div class="col-md-12">
-		<div class="well"><form>{{ filter_form.as_p }} <button type="submit">Filter</button></form></div>
+		<div class="well">
+		<form>
+		{{ filter_form.as_p }}
+		<button class="btn btn-warning" type="submit">Filter</button>
+		
+		</form>
+		</div>
 		{% if msgs %}
 		<table class="table table-condensed table-bordered table-striped table-hover">
 			<thead>

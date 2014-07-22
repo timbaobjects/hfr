@@ -3,6 +3,12 @@
 {% block main %}
 <div class="row">
 	<div class="col-md-12">
+	<div class="well">
+	<form>
+	{{ filter_form.as_p }}
+	<button class="btn btn-warning" type="submit">Filter</button>
+	</form>
+	</div>
 	{% if workers %}
 	<table class="table table-bordered table-condensed table-striped table-hover">
 		<thead>

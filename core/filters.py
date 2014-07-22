@@ -3,6 +3,7 @@ from django import forms
 import django_filters
 from rapidsms.contrib.messagelog.models import Message
 from locations.models import Location, LocationType
+from workers.models import Worker
 
 
 def parse_date_range(value, sep='-'):
@@ -67,24 +68,9 @@ class MessageConnectionFilter(django_filters.CharFilter):
         return qs
 
 
-class BaseLocationFilter(django_filters.ChoiceFilter):
+class BaseLocationFilter(django_filters.CharFilter):
     def __init__(self, *args, **kwargs):
-        loc_type_qs = kwargs.pop('queryset', LocationType.objects.all())
-        location_types = loc_type_qs.values('pk', 'name')
-        locations = Location.objects.filter(
-            location_type__pk__in=[t['pk'] for t in location_types]
-        ).order_by('location_type', 'name').values(
-            'pk', 'location_type__name', 'name'
-        )
-
-        filter_locations = {}
-        for location in locations:
-            filter_locations.setdefault(
-                location['location_type__name'], []
-            ).append((location['pk'], location['name']))
-
-        kwargs['choices'] = [['', '']] + \
-            [[k, filter_locations[k]] for k in filter_locations.keys()]
+        kwargs['widget'] = forms.HiddenInput()
 
         return super(BaseLocationFilter, self).__init__(*args, **kwargs)
 
@@ -118,6 +104,14 @@ class WorkerLocationFilter(BaseLocationFilter):
         return qs
 
 
+class WorkerPhoneFilter(django_filters.CharFilter):
+    def filter(self, qs, value):
+        if value:
+            return qs.filter(contact__connection__identity__icontains=value)
+
+        return qs
+
+
 class MessageFilterSet(django_filters.FilterSet):
     direction = MessageDirectionFilter()
     phone = MessageConnectionFilter()
@@ -126,4 +120,12 @@ class MessageFilterSet(django_filters.FilterSet):
 
     class Meta:
         model = Message
+        fields = []
+
+
+class WorkerFilterSet(django_filters.FilterSet):
+    phone = WorkerPhoneFilter()
+
+    class Meta:
+        model = Worker
         fields = []

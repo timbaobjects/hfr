@@ -12,7 +12,7 @@ from django.views.generic import ListView, UpdateView, View
 from django.views.generic.base import TemplateResponseMixin
 from rapidsms.contrib.messagelog.models import Message
 from checklists.models import Form
-from core.filters import MessageFilterSet
+from core.filters import MessageFilterSet, WorkerFilterSet
 from core.forms import generate_report_edit_form
 from core.models import Report
 from workers.models import Worker
@@ -125,8 +125,9 @@ class ReportListView(ListView):
         return context
 
 
-class WorkerListView(ListView):
+class WorkerListView(FilteredListView):
     context_object_name = 'workers'
+    filter_class = WorkerFilterSet
     page_title = 'Personnel'
     paginate_by = settings.PAGE_SIZE
     queryset = Worker.objects.all()
