@@ -8,14 +8,14 @@ def get_base_chart_data(queryset, tags=None):
     grouped = dataframe.groupby('location')
 
     if tags:
-        data = {
-            loc: grouped.get_group(loc).set_index('updated').resample(
-                'M', how=np.sum)[tags] for loc in locations
-        }
+        data = [
+            (loc, grouped.get_group(loc).set_index('updated').resample(
+                'M', how=np.sum)[tags]) for loc in locations
+        ]
     else:
-        data = {
-            loc: grouped.get_group(loc).set_index('updated').resample(
-                'M', how=np.sum) for loc in locations
-        }
+        data = [
+            (loc, grouped.get_group(loc).set_index('updated').resample(
+                'M', how=np.sum)) for loc in locations
+        ]
 
     return data
