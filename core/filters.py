@@ -113,9 +113,9 @@ class WorkerPhoneFilter(django_filters.CharFilter):
 
 
 class MessageFilterSet(django_filters.FilterSet):
-    direction = MessageDirectionFilter(label="",widget=forms.Select({
-        'class': 'input-sm col-md-2 form-control','placeholder':'Direction'}))
-    phone = MessageConnectionFilter(label="",widget=forms.TextInput({
+    direction = MessageDirectionFilter(label="", widget=forms.Select({
+        'class': 'input-sm col-md-2 form-control', 'placeholder': 'Direction'}))
+    phone = MessageConnectionFilter(label="", widget=forms.TextInput({
         'class': 'form-control input-sm col-md-2','placeholder':'Phone'}))
     date_range = MessageDateTimeRangeFilter(label="",widget=forms.TextInput({
         'class': 'time-range input-sm col-md-2 form-control', 'placeholder':'Date Range'}))
